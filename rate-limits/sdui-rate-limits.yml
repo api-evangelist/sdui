@@ -1,0 +1,24 @@
+generated: '2026-08-26'
+method: probed
+source: live unauthenticated responses from https://api.sdui.app/v1/* (2026-08-26)
+limit_count: 0
+rate_limits: []
+docs: null
+response_headers: []
+exhaustion_status: null
+note: >-
+  Sdui documents no rate limits anywhere — there is no developer portal or API reference in which to
+  publish them. Probing the live API directly, no X-RateLimit-*, RateLimit-* or Retry-After header was
+  returned on any response, authenticated or not, and no 429 was observed. The response headers seen
+  on api.sdui.app are limited to cache-control, content-type, vary, www-authenticate, server and
+  x-xss-protection. An agent integrating with this API therefore has no runtime backpressure signal at
+  all: it cannot learn its budget from the docs, and it cannot learn it from the response either.
+  limit_count: 0 is an honest measured zero.
+evidence:
+- url: https://api.sdui.app/v1/
+  status: 404
+  headers_observed: [cache-control, content-type, date, server, vary, www-authenticate, x-xss-protection]
+- url: https://api.sdui.app/v1/users
+  status: 401
+- url: https://api.sdui.app/v1/status
+  status: 200

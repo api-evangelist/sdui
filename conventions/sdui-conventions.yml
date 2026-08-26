@@ -1,0 +1,73 @@
+generated: '2026-08-26'
+method: probed
+source: live unauthenticated responses from https://api.sdui.app/v1/* (2026-08-26)
+docs: null
+docs_note: >-
+  No published API conventions exist. Everything recorded here is observed from live unauthenticated
+  responses; anything not observable without credentials is recorded as unknown rather than assumed.
+api: Sdui Platform API
+auth_style:
+  model: bearer-token
+  header: Authorization
+  documented: false
+versioning:
+  style: uri-path
+  current: v1
+  example: https://api.sdui.app/v1/users
+  documented: false
+error_envelope:
+  shape: >-
+    {"data": <object|array>, "status": "SUCCESS"|"ERROR",
+     "meta": {"warnings": [], "errors": [<string>], "success": []}}
+  format: custom
+  rfc9457: false
+  http_status_used: true
+  language: German (error strings observed in German, e.g. "Bitte zuerst einloggen.")
+  observed:
+  - url: https://api.sdui.app/v1/users
+    status: 401
+    body: '{"data":[],"status":"ERROR","meta":{"warnings":[],"errors":["Bitte zuerst einloggen."],"success":[]}}'
+  - url: https://api.sdui.app/v1/nonexistent
+    status: 404
+    body: '{"data":{...},"status":"ERROR","meta":{"errors":["404 - URL oder HTTP-Resource nicht gefunden."]}}'
+idempotency:
+  supported: unknown
+  note: >-
+    No idempotency key header is documented or observable on unauthenticated responses. No
+    Idempotency pointer is emitted, because asserting one would be a claim we cannot evidence.
+pagination:
+  style: unknown
+  note: Not observable without credentials; no docs.
+request_id_tracing:
+  supported: partial
+  note: >-
+    GET /v1/status returns a `machine` field (Kubernetes pod name, e.g. sduiapp-core-5594c4d9c7-xr8dk)
+    and a `release` git SHA, plus per-phase timings (d/c/m/l). No per-request correlation ID header
+    was observed on error responses.
+rate_limit_signaling:
+  headers_observed: []
+  note: No X-RateLimit-* or RateLimit-* headers were returned on any probed response.
+cors:
+  vary_origin: true
+  note: 'Responses carry `vary: Origin`; /v1/status advertises allowed targets sdui.app, einfach.schule, *.pupil-dev.ch, *.pupil.schule.'
+health_endpoint:
+  url: https://api.sdui.app/v1/status
+  status: 200
+  fields: [mode, targets, host, machine, scheme, method, base, origin, version, ping, ip, release]
+reversibility:
+  grade: na
+  applicable: false
+  rationale: >-
+    Reversibility, dry-run and idempotency are all `na` for this profile. Every write surface of the
+    Sdui Platform API is behind authentication, no operation catalogue is published, and Sdui states
+    nothing anywhere public about cancel/undo/restore paths or the windows they run in. Asserting a
+    reversal window we did not read in the provider's own docs is the one error in this pipeline that
+    could cost a user real money, so nothing is asserted. This is a documentation gap, not a finding
+    that the API lacks reversal operations.
+  reversal_operations: []
+  windows: []
+cross_links:
+  authentication: authentication/sdui-authentication.yml
+  errors: errors/sdui-problem-types.yml
+  lifecycle: lifecycle/sdui-lifecycle.yml
+  rate_limits: rate-limits/sdui-rate-limits.yml

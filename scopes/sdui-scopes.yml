@@ -1,0 +1,28 @@
+generated: '2026-08-26'
+method: probed
+source: https://sdui.de/.well-known/oauth-authorization-server
+api: Sdui Website MCP Server
+authorization_server: https://sdui.de
+docs: null
+docs_note: Sdui publishes no OAuth scope reference page; the scope set below is read from the served RFC 8414 metadata only.
+flows:
+- type: authorization_code
+  authorization_endpoint: https://sdui.de/oauth/authorize
+  token_endpoint: https://sdui.de/oauth/token
+  revocation_endpoint: https://sdui.de/oauth/revoke
+  pkce: true
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none]
+  refresh_token_supported: true
+scopes:
+- name: mcp
+  description: >-
+    The single scope advertised by both the authorization-server metadata (scopes_supported) and the
+    protected-resource metadata for https://sdui.de/wp-json/mcp/mcp-oauth-server. Sdui publishes no
+    description of what it grants; it is recorded verbatim as the only declared scope.
+  source: /.well-known/oauth-authorization-server + /.well-known/oauth-protected-resource
+scope_count: 1
+notes:
+- token_endpoint_auth_methods_supported is ["none"], i.e. public clients with PKCE.
+- client_id_metadata_document_supported is true.
+- The Sdui Platform API at api.sdui.app does NOT use OAuth — it answers WWW-Authenticate Bearer with no discovery document.

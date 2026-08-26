@@ -1,0 +1,20 @@
+generated: '2026-08-26'
+method: searched
+source: https://sdui.de/page-sitemap.xml (176 pages walked), https://sdui.de/contact-our-sales-team/?lang=en
+plan_count: 0
+plans: []
+pricing_url: null
+note: >-
+  Sdui publishes no pricing or plans page. The full 176-URL page sitemap was walked and contains no
+  /pricing, /preise or /kosten route; https://sdui.de/preise/ and https://sdui.de/pricing/ both return
+  HTTP 404. Commercial terms are handled entirely through a sales motion — the site's calls to action
+  are "Contact our sales team" and a "free consulting call", and the group also sells through a
+  certified reseller and OEM/whitelabel channel. There is no self-serve tier, no published unit price
+  and no API-metered plan of any kind. plan_count: 0 is the measured fact, not a gap in this pass.
+evidence:
+- url: https://sdui.de/pricing/
+  status: 404
+- url: https://sdui.de/preise/
+  status: 404
+- url: https://sdui.de/contact-our-sales-team/?lang=en
+  status: 200

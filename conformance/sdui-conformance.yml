@@ -1,0 +1,87 @@
+generated: '2026-08-26'
+method: searched
+source: https://sdui.de/why-sdui/?lang=en, https://sdui.de/our-partners/?lang=en, live probes of api.sdui.app and sdui.de
+conformance:
+- id: gdpr
+  conforms: true
+  evidence:
+    url: https://sdui.de/why-sdui/?lang=en
+    http_status: 200
+    quote: 'GDPR-compliant for full security'
+    note: >-
+      GDPR/DSGVO compliance is the company's central marketing claim across the site and is the basis
+      of its positioning for German and Swiss public schools. It is a stated claim, not an audited
+      certification — Sdui names no certifying body.
+- id: oauth2
+  conforms: true
+  evidence:
+    url: https://sdui.de/.well-known/oauth-authorization-server
+    http_status: 200
+    note: >-
+      RFC 6749 authorization_code + RFC 7636 PKCE (S256), with RFC 7009 revocation. Scope is the
+      sdui.de WordPress MCP server only, not the Sdui Platform API.
+- id: rfc8414
+  conforms: true
+  evidence:
+    url: https://sdui.de/.well-known/oauth-authorization-server
+    http_status: 200
+- id: rfc9728
+  conforms: true
+  evidence:
+    url: https://sdui.de/.well-known/oauth-protected-resource
+    http_status: 200
+    note: OAuth 2.0 Protected Resource Metadata, naming https://sdui.de/wp-json/mcp/mcp-oauth-server.
+- id: rfc9116
+  conforms: true
+  evidence:
+    url: https://sdui.app/.well-known/security.txt
+    http_status: 200
+    note: Valid security.txt with Contact, Policy, Preferred-Languages, Hiring and a non-expired Expires (2027-02-23).
+- id: mcp
+  conforms: true
+  evidence:
+    url: https://sdui.de/wp-json/mcp/mcp-oauth-server
+    http_status: 401
+    note: Model Context Protocol server responding to JSON-RPC over HTTP with an OAuth challenge.
+- id: oidc
+  conforms: false
+  evidence:
+    url: https://sdui.de/.well-known/openid-configuration
+    http_status: 404
+- id: rfc9457
+  conforms: false
+  evidence:
+    url: https://api.sdui.app/v1/users
+    http_status: 401
+    note: Errors use a custom {data,status,meta.errors} envelope with application/json, not application/problem+json.
+- id: openapi
+  conforms: false
+  evidence:
+    url: https://api.sdui.app/v1/openapi.json
+    http_status: 404
+    note: No OpenAPI, Swagger, GraphQL SDL, AsyncAPI, Protobuf or WSDL was found on any Sdui host.
+- id: api-catalog
+  conforms: false
+  evidence:
+    url: https://sdui.de/.well-known/api-catalog
+    http_status: 404
+domain_standard:
+  market: K-12 / school administration and communication (EdTech)
+  candidate_standards: [OneRoster, LTI, Ed-Fi, SIF, SCIM, Caliper, QTI, OAI-PMH]
+  declared: false
+  evidence:
+    url: https://sdui.de/our-partners/?lang=en
+    http_status: 200
+    note: >-
+      REWARD-ONLY CHECK, recorded as an honest absence. Sdui's market does have interoperability
+      standards, but no Sdui contract or public page declares one. Every integration Sdui advertises
+      is a bilateral, proprietary interface: a user-synchronisation link into WebUntis/Untis, a
+      timetable interface with Stüber Systems (DAVINCI/ENBREA), and menu-level embedding of LMS
+      products such as Moodle. The partners page describes these as "an interface" without naming a
+      specification. No SCIM schema URN, OneRoster endpoint, LTI launch, or Ed-Fi shape was observed
+      on any probed surface.
+certifications: []
+certifications_note: >-
+  No named certification (ISO 27001, SOC 2, TISAX, BSI C5, TÜV) is published on any Sdui page reviewed,
+  and no trust center exists (trust.sdui.de does not resolve). Because GDPR is a stated claim rather
+  than a published certification or audit report, no `Compliance` pointer is emitted.

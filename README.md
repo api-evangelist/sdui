@@ -64,5 +64,27 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sdui is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Sdui GmbH (Koblenz, Germany; part of the Sdui Group / Seven Education) builds GDPR-compliant digital
+communication, organisation and administration software for schools, preschools and school authorities
+in Germany, Switzerland, France and Spain. The platform spans communication and organisation (the Sdui
+messenger app), planning and administration (timetabling and an AI timetable planner) and learning and
+grade management. The group also operates the Pupil, Additio, Konecto, Fox Education and OSS Messenger
+brands.
+
+## API surface
+
+Sdui runs a production JSON API at `https://api.sdui.app/v1` that serves its own web and mobile clients
+and its WebUntis messenger integration. It publishes **no developer portal, no API reference and no
+machine-readable specification** — every resource path answers HTTP 401 behind `WWW-Authenticate:
+Bearer`, and the 176-page sdui.de sitemap contains no developer or pricing route.
+
+What Sdui does serve machine-readably has been captured here:
+
+- `well-known/sdui-security.txt` — RFC 9116 security.txt on `sdui.app`
+- `well-known/sdui-oauth-authorization-server.json` — RFC 8414 metadata on `sdui.de`
+- `well-known/sdui-oauth-protected-resource.json` — RFC 9728 metadata on `sdui.de`
+- `mcp/sdui-mcp.yml` — a live, OAuth-gated Model Context Protocol server at
+  `https://sdui.de/wp-json/mcp/mcp-oauth-server`, exposed by the WordPress marketing site rather than
+  by the school platform
+
+- https://sdui.de/?lang=en

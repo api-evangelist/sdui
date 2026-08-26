@@ -1,0 +1,42 @@
+generated: '2026-08-26'
+method: probed
+source: live unauthenticated responses from https://api.sdui.app/v1/* (2026-08-26)
+api: Sdui Platform API
+format: custom
+rfc9457: false
+docs: null
+docs_note: >-
+  Sdui publishes no error reference. Only the error shapes reachable without credentials are recorded;
+  the catalogue is deliberately short rather than padded with plausible entries.
+envelope:
+  fields:
+    data: object or array — payload, empty on error
+    status: SUCCESS | ERROR
+    meta.errors: array of human-readable strings (German)
+    meta.warnings: array
+    meta.success: array
+  content_type: application/json; charset=utf-8
+problem_types:
+- code: null
+  http_status: 401
+  message: 'Bitte zuerst einloggen.'
+  translation: Please log in first.
+  meaning: No or invalid bearer credential on a protected resource.
+  remediation: 'Present a valid Authorization: Bearer token.'
+  observed_at:
+  - https://api.sdui.app/v1/users
+  - https://api.sdui.app/v1/schools
+- code: null
+  http_status: 404
+  message: '404 - URL oder HTTP-Resource nicht gefunden.'
+  translation: 404 - URL or HTTP resource not found.
+  meaning: Unknown route under /v1.
+  remediation: Check the path; no public route index is published.
+  observed_at:
+  - https://api.sdui.app/v1/
+  - https://api.sdui.app/v1/openapi.json
+error_count: 2
+notes:
+- Errors carry no machine-readable code field — only a localized human string, which an agent cannot branch on reliably.
+- Error strings are German-only even when the request carries no Accept-Language preference.
+- Paths outside /v1 are handled by nginx and return plain-text "404 page not found", not the JSON envelope.

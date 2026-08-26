@@ -1,0 +1,53 @@
+generated: '2026-08-26'
+method: probed
+source: live unauthenticated probes of https://api.sdui.app/v1/* and https://sdui.de/.well-known/*
+docs: null
+docs_note: >-
+  Sdui publishes no authentication documentation. There is no developer portal, no API reference and
+  no page in the sdui.de sitemap (176 pages walked) describing credentials, tokens or key issuance.
+  Everything below is observed from live unauthenticated responses, not from provider prose.
+apis:
+- api: Sdui Platform API
+  base_url: https://api.sdui.app/v1
+  schemes:
+  - type: http
+    scheme: bearer
+    in: header
+    name: Authorization
+    evidence:
+      url: https://api.sdui.app/v1/
+      http_status: 404
+      response_header: 'www-authenticate: Bearer'
+    note: >-
+      The server emits `WWW-Authenticate: Bearer` on unauthenticated requests. Protected resources
+      answer HTTP 401 with the envelope
+      {"data":[],"status":"ERROR","meta":{"errors":["Bitte zuerst einloggen."]}} — German for
+      "Please log in first". The token issuance flow is not publicly documented; credentials are
+      obtained by signing in to a school tenant in the Sdui app, or through the partner/sales channel
+      for integrations such as the WebUntis messenger.
+  oauth2: false
+  api_key: false
+  mtls: false
+  gated: true
+- api: Sdui Website MCP Server
+  base_url: https://sdui.de/wp-json/mcp
+  schemes:
+  - type: oauth2
+    flow: authorization_code
+    pkce: S256
+    authorization_endpoint: https://sdui.de/oauth/authorize
+    token_endpoint: https://sdui.de/oauth/token
+    revocation_endpoint: https://sdui.de/oauth/revoke
+    scopes: [mcp]
+    token_endpoint_auth_methods: [none]
+    evidence:
+      url: https://sdui.de/.well-known/oauth-authorization-server
+      http_status: 200
+  oauth2: true
+  api_key: false
+  mtls: false
+  gated: true
+summary:
+  auth_documented: false
+  discovery_document_present: true
+  discovery_document_scope: MCP server on the WordPress site only

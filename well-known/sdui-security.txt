@@ -1,0 +1,6 @@
+Contact: mailto:security@sdui.de
+Contact: https://support.sdui.de/en_US/96472-allgemeine-fragen/security-concern-what-to-do
+Preferred-Languages: en, de
+Policy: https://support.sdui.de/en_US/96472-allgemeine-fragen/security-concern-what-to-do
+Hiring: https://tech.sdui.de
+Expires: 2027-02-23T00:00:00.000Z

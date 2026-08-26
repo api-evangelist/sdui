@@ -1,18 +1,74 @@
 aid: sdui
 name: Sdui
-description: 'Sdui is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Sdui is a Koblenz, Germany based education-technology company (Sdui GmbH, part of the Sdui Group /
+  Seven Education) that builds GDPR-compliant digital communication, organisation and administration
+  software for schools, preschools and school authorities across Germany, Switzerland, France and
+  Spain. The platform spans three suites — Communication and Organisation (the Sdui messenger app,
+  chat, video conferencing, calendar and announcements), Planning and Administration (timetabling,
+  resource planning, an AI timetable planner and document management), and Learning and Grade
+  Management (digital gradebook and lesson planning) — and the group also operates the Pupil, Additio,
+  Konecto, Fox Education and OSS Messenger brands. Sdui runs a production JSON API at
+  https://api.sdui.app/v1 that powers its own web and mobile clients and its WebUntis messenger
+  integration, but it publishes no public developer portal, API reference or machine-readable
+  specification; integration access is arranged through the partner and sales channel.
+image: https://sdui.de/wp-content/uploads/2024/02/Sdui-Gruppe-Logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sdui/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Education
+- EdTech
+- Schools
+- Communication
+- Messaging
+- Timetabling
+- Grade Management
+- Germany
+- GDPR
+apis:
+- name: Sdui Platform API
+  description: >-
+    The production JSON API behind the Sdui school-communication platform, serving the Sdui web app,
+    the iOS/Android clients and the WebUntis messenger integration. Every resource path probed
+    (/v1/users, /v1/schools) answers HTTP 401 with a German-language envelope, and an unauthenticated
+    WWW-Authenticate: Bearer challenge is returned. Sdui publishes no OpenAPI, no API reference and no
+    developer portal; the surface below is recorded from live unauthenticated probes only.
+  humanURL: https://sdui.de/overview/?lang=en
+  baseURL: https://api.sdui.app/v1
+  tags:
+  - Education
+  - Schools
+  - Communication
+  properties:
+  - type: Authentication
+    url: authentication/sdui-authentication.yml
+  - type: Conventions
+    url: conventions/sdui-conventions.yml
+  - type: ErrorCatalog
+    url: errors/sdui-problem-types.yml
+- name: Sdui Website MCP Server
+  description: >-
+    A Model Context Protocol server exposed by the sdui.de WordPress site through the `mcp` REST
+    namespace and advertised at /.well-known/oauth-protected-resource. The endpoint answers JSON-RPC
+    over HTTP and returns HTTP 401 mcp_unauthorized to anonymous callers; the paired authorization
+    server metadata at /.well-known/oauth-authorization-server declares authorization_code + PKCE
+    (S256) with a single `mcp` scope. This is the marketing/CMS site's agent surface, not the Sdui
+    Platform API.
+  humanURL: https://sdui.de/
+  baseURL: https://sdui.de/wp-json/mcp
+  tags:
+  - MCP
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/sdui-mcp.yml
+  - type: OAuthScopes
+    url: scopes/sdui-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +76,66 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://sdui.de/?lang=en
+- type: Support
+  url: https://support.sdui.de/
+- type: Blog
+  url: https://sdui.de/blog/?lang=en
+- type: TermsOfService
+  url: https://sdui.de/agb/
+- type: PrivacyPolicy
+  url: https://sdui.de/privacy-policy/?lang=en
+- type: SignUp
+  url: https://sdui.app/
+- type: StatusPage
+  url: https://status.sdui.de/
+- type: Security
+  url: https://support.sdui.de/en_US/96472-allgemeine-fragen/security-concern-what-to-do
+- type: SecurityTxt
+  url: well-known/sdui-security.txt
+- type: WellKnown
+  url: well-known/sdui-well-known.yml
+- type: VulnerabilityDisclosure
+  url: security/sdui-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/sdui-domain-security.yml
+- type: Lifecycle
+  url: lifecycle/sdui-lifecycle.yml
+- type: Conformance
+  url: conformance/sdui-conformance.yml
+- type: Packages
+  url: packages/sdui-packages.yml
+- type: LLMsTxt
+  url: llms/sdui-llms.txt
+- type: Plans
+  url: plans/sdui-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sdui-rate-limits.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: null
+  detail: >-
+    Sdui runs a real production API at https://api.sdui.app/v1, but publishes no contract for it:
+    every resource answers HTTP 401 "Bitte zuerst einloggen." behind WWW-Authenticate Bearer, and the
+    176-page sdui.de sitemap contains no developer portal, API reference or pricing route. What Sdui
+    does serve machine-readably was captured — an RFC 9116 security.txt on sdui.app, RFC 8414 and
+    RFC 9728 OAuth metadata on sdui.de, and a live OAuth-gated Model Context Protocol server at
+    https://sdui.de/wp-json/mcp/mcp-oauth-server that belongs to the WordPress marketing site rather
+    than the school platform.
+  evidence:
+  - url: https://api.sdui.app/v1/users
+    status: 401
+  - url: https://api.sdui.app/v1/openapi.json
+    status: 404
+  - url: https://sdui.de/.well-known/oauth-protected-resource
+    status: 200
+  - url: https://sdui.de/wp-json/mcp/mcp-oauth-server
+    status: 401
+  - url: https://sdui.app/.well-known/security.txt
+    status: 200
+  checked: '2026-08-26'

@@ -1,0 +1,49 @@
+generated: '2026-08-26'
+method: probed
+source: https://sdui.de/.well-known/oauth-protected-resource
+name: Sdui Website MCP Server
+status: live
+deployment:
+  mode: remote
+  endpoint: https://sdui.de/wp-json/mcp/mcp-oauth-server
+  auth: oauth
+  verified: probed
+discovery:
+  protected_resource: https://sdui.de/.well-known/oauth-protected-resource
+  authorization_server: https://sdui.de/.well-known/oauth-authorization-server
+  rest_namespace: mcp
+  namespace_index: https://sdui.de/wp-json/mcp
+tools: []
+tools_note: >-
+  tools/list could not be enumerated. Anonymous JSON-RPC calls to the endpoint (both tools/list and
+  initialize) return HTTP 401 {"code":"mcp_unauthorized","message":"MCP authentication required."}.
+  The live tool set and its inputSchemas require an authenticated OAuth introspection, so nothing is
+  recorded here rather than guessed. No llms.txt or published tool list exists to fall back on.
+x-evidence:
+- url: https://sdui.de/.well-known/oauth-protected-resource
+  method: GET
+  http_status: 200
+  content_type: application/json
+- url: https://sdui.de/.well-known/oauth-authorization-server
+  method: GET
+  http_status: 200
+  content_type: application/json
+- url: https://sdui.de/wp-json/mcp/mcp-oauth-server
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 401
+  response: '{"code":"mcp_unauthorized","message":"MCP authentication required.","data":{"status":401}}'
+- url: https://sdui.de/wp-json/mcp/mcp-oauth-server
+  method: POST
+  body: '{"jsonrpc":"2.0","id":1,"method":"initialize",...}'
+  http_status: 401
+- url: https://sdui.de/wp-json/mcp
+  method: GET
+  http_status: 200
+  note: WordPress REST route index confirming the `mcp` namespace is registered.
+note: >-
+  This server is exposed by the sdui.de WordPress marketing site, not by the Sdui Platform API at
+  api.sdui.app. The wp-json namespace list also carries `wp-abilities/v1`, indicating the WordPress
+  Abilities API backs the MCP adapter. It is a genuine, provider-served, remotely-callable agent
+  surface — an agent can POST to the endpoint today given an OAuth token — but its scope is the
+  website/CMS, and it should not be read as an agent interface to the school platform.

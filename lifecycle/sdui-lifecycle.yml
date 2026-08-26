@@ -1,0 +1,51 @@
+generated: '2026-08-26'
+method: searched
+source: https://status.sdui.de/ + live probes of https://api.sdui.app/v1
+api: Sdui Platform API
+versioning:
+  scheme: uri-path
+  current_version: v1
+  policy_published: false
+  policy_url: null
+  note: The base URL carries /v1 but no versioning policy, version history or version-negotiation header is published.
+deprecation:
+  policy_published: false
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  deprecated_operations: []
+  note: >-
+    No deprecation policy exists on any public Sdui surface, and no RFC 8594 Sunset/Deprecation header
+    was observed on probed responses. No Deprecation pointer is emitted.
+status_page:
+  url: https://status.sdui.de/
+  http_status: 200
+  title: 'Sdui App Status'
+  vendor: unidentified (self-hosted status route; no Statuspage/Instatus/Atlassian markers found)
+  machine_readable_feed: false
+  probes:
+  - path: /history.rss
+    status: 404
+  - path: /history.atom
+    status: 404
+  - path: /summary.json
+    status: 404
+  - path: /api/v2/status.json
+    status: 404
+  note: >-
+    A human status page is served and was live at probe time ("Keine Probleme festgestellt"), but every
+    conventional machine-readable status feed 404s, so an agent cannot subscribe to incidents.
+sla:
+  published: false
+  url: null
+release_signal:
+  endpoint: https://api.sdui.app/v1/status
+  fields: [release, machine, mode]
+  note: >-
+    The unauthenticated /v1/status endpoint exposes the deployed git commit SHA and pod name. It is
+    the only public change signal Sdui emits — there is no changelog, release notes or version feed,
+    so no changelog/ artifact was written.
+changelog:
+  published: false
+  url: null
