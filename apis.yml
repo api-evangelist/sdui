@@ -12,6 +12,17 @@ description: >-
   https://api.sdui.app/v1 that powers its own web and mobile clients and its WebUntis messenger
   integration, but it publishes no public developer portal, API reference or machine-readable
   specification; integration access is arranged through the partner and sales channel.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://sdui.de/wp-content/uploads/2024/02/Sdui-Gruppe-Logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sdui/refs/heads/main/apis.yml
 x-type: company
