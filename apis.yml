@@ -35,6 +35,17 @@ tags:
 - Education
 - EdTech
 - Schools
+- Communications
+- Messaging
+- Timetabling
+- Grade Management
+- Germany
+- GDPR
+tags_raw:
+- Company
+- Education
+- EdTech
+- Schools
 - Communication
 - Messaging
 - Timetabling
@@ -52,6 +63,10 @@ apis:
   humanURL: https://sdui.de/overview/?lang=en
   baseURL: https://api.sdui.app/v1
   tags:
+  - Education
+  - Schools
+  - Communications
+  tags_raw:
   - Education
   - Schools
   - Communication
