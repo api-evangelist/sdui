@@ -23,6 +23,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: open
+  trial: false
+  try_now: false
+  public: true
+  label: Open access
+  confidence: medium
+  source:
+  - authentication
+  - scopes
+  - rate-limits
+  - security
+  generated: '2026-09-02'
+  method: derived
 image: https://sdui.de/wp-content/uploads/2024/02/Sdui-Gruppe-Logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/sdui/refs/heads/main/apis.yml
 x-type: company
