@@ -1,24 +1,23 @@
 generated: '2026-08-26'
 method: probed
 source: live GET of /.well-known/* on every apis.yml baseURL host (2026-08-26)
-note: >-
-  sdui.app is a single-page application whose catch-all answers HTTP 200 with the app's HTML shell for
-  every /.well-known/* path. Only /.well-known/security.txt on that host returns a real document; the
-  other seven 200s are the SPA shell and are recorded as misses, not hits. api.sdui.app returns a
-  plain-text "404 page not found" for every well-known path. The only machine-readable well-known
-  documents Sdui serves are the pair of OAuth metadata files on sdui.de, which exist because the
-  WordPress marketing site ships a Model Context Protocol server in its `mcp` REST namespace.
+note: sdui.app is a single-page application whose catch-all answers HTTP 200 with the app's HTML shell
+  for every /.well-known/* path. Only /.well-known/security.txt on that host returns a real document;
+  the other seven 200s are the SPA shell and are recorded as misses, not hits. api.sdui.app returns a
+  plain-text "404 page not found" for every well-known path. The only machine-readable well-known documents
+  Sdui serves are the pair of OAuth metadata files on sdui.de, which exist because the WordPress marketing
+  site ships a Model Context Protocol server in its `mcp` REST namespace.
 hosts:
 - host: sdui.de
   documents:
   - path: /.well-known/oauth-authorization-server
     status: 200
-    file: well-known/sdui-oauth-authorization-server.json
+    file: sdui-oauth-authorization-server.json
     content_type: application/json
     note: RFC 8414 authorization server metadata for the sdui.de MCP OAuth server.
   - path: /.well-known/oauth-protected-resource
     status: 200
-    file: well-known/sdui-oauth-protected-resource.json
+    file: sdui-oauth-protected-resource.json
     content_type: application/json
     note: RFC 9728 protected resource metadata naming https://sdui.de/wp-json/mcp/mcp-oauth-server.
   - path: /.well-known/security.txt
@@ -37,7 +36,7 @@ hosts:
   documents:
   - path: /.well-known/security.txt
     status: 200
-    file: well-known/sdui-security.txt
+    file: sdui-security.txt
     content_type: text/plain
     note: RFC 9116 security.txt, Expires 2027-02-23.
   - path: /.well-known/openid-configuration
