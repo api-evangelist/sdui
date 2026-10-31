@@ -64,27 +64,119 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Sdui GmbH (Koblenz, Germany; part of the Sdui Group / Seven Education) builds GDPR-compliant digital
-communication, organisation and administration software for schools, preschools and school authorities
-in Germany, Switzerland, France and Spain. The platform spans communication and organisation (the Sdui
-messenger app), planning and administration (timetabling and an AI timetable planner) and learning and
-grade management. The group also operates the Pupil, Additio, Konecto, Fox Education and OSS Messenger
-brands.
+Sdui is a Koblenz, Germany based education-technology company (Sdui GmbH, part of the Sdui Group / Seven Education) that builds GDPR-compliant digital communication, organisation and administration software for schools, preschools and school authorities across Germany, Switzerland, France and Spain. The platform spans three suites — Communication and Organisation (the Sdui messenger app, chat, video conferencing, calendar and announcements), Planning and Administration (timetabling, resource planning, an AI timetable planner and document management), and Learning and Grade Management (digital gradebook and lesson planning) — and the group also operates the Pupil, Additio, Konecto, Fox Education and OSS Messenger brands. Sdui runs a production JSON API at https://api.sdui.app/v1 that powers its own web and mobile clients and its WebUntis messenger integration, but it publishes no public developer portal, API reference or machine-readable specification; integration access is arranged through the partner and sales channel.
 
-## API surface
+**Areas:** Company · Education · EdTech · Schools · Communications · Messaging · Timetabling · Grade Management · Germany · GDPR
 
-Sdui runs a production JSON API at `https://api.sdui.app/v1` that serves its own web and mobile clients
-and its WebUntis messenger integration. It publishes **no developer portal, no API reference and no
-machine-readable specification** — every resource path answers HTTP 401 behind `WWW-Authenticate:
-Bearer`, and the 176-page sdui.de sitemap contains no developer or pricing route.
+## Sdui on APIs.io
 
-What Sdui does serve machine-readably has been captured here:
+Everything profiled for Sdui is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/sdui/](https://apis.io/providers/sdui/)** — or go straight to one of the APIs or properties below.
 
-- `well-known/sdui-security.txt` — RFC 9116 security.txt on `sdui.app`
-- `well-known/sdui-oauth-authorization-server.json` — RFC 8414 metadata on `sdui.de`
-- `well-known/sdui-oauth-protected-resource.json` — RFC 9728 metadata on `sdui.de`
-- `mcp/sdui-mcp.yml` — a live, OAuth-gated Model Context Protocol server at
-  `https://sdui.de/wp-json/mcp/mcp-oauth-server`, exposed by the WordPress marketing site rather than
-  by the school platform
+### APIs (2)
 
-- https://sdui.de/?lang=en
+- [Sdui Platform API](https://apis.io/apis/sdui/sdui-platform-api/) — The production JSON API behind the Sdui school-communication platform, serving the Sdui web app, the iOS/Android clients and the WebUntis messenger…
+- [Sdui Website MCP Server](https://apis.io/apis/sdui/sdui-website-mcp-server/) — A Model Context Protocol server exposed by the sdui.de WordPress site through the `mcp` REST namespace and advertised at…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Sdui Website MCP Server](https://apis.io/servers/sdui/sdui-website-mcp-server/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Sdui Authentication](https://apis.io/security/sdui/sdui-authentication/)
+- [Sdui Domain Security](https://apis.io/security/sdui/sdui-domain-security/)
+- [Sdui Vulnerability Disclosure](https://apis.io/security/sdui/sdui-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Sdui Scopes](https://apis.io/scopes/sdui/sdui-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Sdui Plans Pricing](https://apis.io/plans/sdui/sdui-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Sdui Rate Limits](https://apis.io/rate-limits/sdui/sdui-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://sdui.de/?lang=en)
+- [Sign up](https://sdui.app/)
+- [Support](https://support.sdui.de/)
+- [Blog](https://sdui.de/blog/?lang=en)
+- [Security](https://support.sdui.de/en_US/96472-allgemeine-fragen/security-concern-what-to-do)
+- [Terms of service](https://sdui.de/agb/)
+- [Privacy policy](https://sdui.de/privacy-policy/?lang=en)
+- [Status](https://status.sdui.de/)
+
+## API Evangelist rating
+
+**Kin Score 23.7** — emerging · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 21.1 |
+
+**Agent readiness 21.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 40.2** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/sdui/](https://apis.io/providers/sdui/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Sdui: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/sdui/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
